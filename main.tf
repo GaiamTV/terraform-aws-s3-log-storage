@@ -14,6 +14,7 @@ resource "aws_s3_bucket" "default" {
   region        = "${var.region}"
   force_destroy = "${var.force_destroy}"
   policy        = "${var.policy}"
+  tags          = "${module.default_label.tags}"
 
   versioning {
     enabled = "${var.versioning_enabled}"
