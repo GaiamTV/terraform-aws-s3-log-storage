@@ -1,5 +1,5 @@
 module "default_label" {
-  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.16.0"
+  source      = "git@github.com:GaiamTV/tf-null-label.git"
   enabled     = var.enabled
   namespace   = var.namespace
   environment = var.environment
