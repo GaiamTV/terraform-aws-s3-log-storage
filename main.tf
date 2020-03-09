@@ -11,8 +11,8 @@ module "default_label" {
 }
 
 resource "aws_s3_bucket" "default" {
-  count         = "${var.enabled}" ? 1 : 0
-  bucket        = module.default_label.id
+  count         = "${var.enabled ? 1 : 0}"
+  bucket        = "${module.default_label.id}"
   acl           = "${var.acl}"
   region        = "${var.region}"
   force_destroy = "${var.force_destroy}"
@@ -23,7 +23,7 @@ resource "aws_s3_bucket" "default" {
   }
 
   lifecycle_rule {
-    id      = module.default_label.id
+    id      = "${module.default_label.id}"
     enabled = "${var.lifecycle_rule_enabled}"
 
     prefix = "${var.lifecycle_prefix}"
@@ -34,7 +34,7 @@ resource "aws_s3_bucket" "default" {
     }
 
     dynamic "noncurrent_version_transition" {
-      for_each = "${var.enable_glacier_transition}" ? [1] : []
+      for_each = "${var.enable_glacier_transition ? [1] : []}"
 
       content {
         days          = "${var.noncurrent_version_transition_days}"
@@ -48,7 +48,7 @@ resource "aws_s3_bucket" "default" {
     }
 
     dynamic "transition" {
-      for_each = "${var.enable_glacier_transition}" ? [1] : []
+      for_each = "${var.enable_glacier_transition ? [1] : []}"
 
       content {
         days          = "${var.glacier_transition_days}"
@@ -72,5 +72,5 @@ resource "aws_s3_bucket" "default" {
     }
   }
 
-  tags = module.default_label.tags
+  tags = "${module.default_label.tags}"
 }
