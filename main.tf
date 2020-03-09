@@ -2,7 +2,7 @@ module "default_label" {
   source      = "git@github.com:GaiamTV/tf-null-label.git"
   enabled     = "${var.enabled}"
   namespace   = "${var.namespace}"
-  environment = ${var.environment}
+  environment = "${var.environment}"
   stage       = "${var.stage}"
   name        = "${var.name}"
   delimiter   = "${var.delimiter}"
